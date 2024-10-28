@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI/CD Pipeline for Next.js on Windows
 
 on:
   push:
@@ -7,3 +7,35 @@ on:
   pull_request:
     branches:
       - main
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js for Windows
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run tests
+      - name: Run tests
+        run: npm test
+
+      # Step 5: Build the Next.js project
+      - name: Build Next.js application
+        run: npm run build
+
+      # Step 6: Export static files (if using `next export` for static deployment)
+      - name: Export Next.js static files
+        run: npm run export
+        if: success()
