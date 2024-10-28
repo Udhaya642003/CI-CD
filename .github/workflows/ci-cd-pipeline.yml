@@ -9,24 +9,38 @@ on:
       - main
 
 jobs:
-  build-and-test:
+  build:
     runs-on: windows-latest
-    
     steps:
       # Step 1: Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
-
       # Step 2: Set up Node.js for Windows
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-
       # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
-
+      # Step 5: Build the Next.js project
+      - name: Build Next.js application
+        run: npm run build
+        if: success()
+  deploy:
+    runs-on: window-latest
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      # Step 2: Set up Node.js for Windows
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
       # Step 5: Build the Next.js project
       - name: Build Next.js application
         run: npm run build
