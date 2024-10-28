@@ -30,8 +30,4 @@ jobs:
       # Step 5: Build the Next.js project
       - name: Build Next.js application
         run: npm run build
-
-      # Step 6: Export static files (if using `next export` for static deployment)
-      - name: Export Next.js static files
-        run: npm run export
         if: success()
