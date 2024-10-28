@@ -26,7 +26,6 @@ jobs:
       # Step 5: Build the Next.js project
       - name: Build Next.js application
         run: npm run build
-        if: success()
   deploy:
     runs-on: window-latest
     steps:
@@ -44,4 +43,3 @@ jobs:
       # Step 5: Build the Next.js project
       - name: Build Next.js application
         run: npm run build
-        if: success()
